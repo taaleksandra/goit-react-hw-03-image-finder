@@ -9,6 +9,7 @@ import { ImageGallery } from './ImageGallery/ImageGallery';
 import { ImageGalleryItem } from './ImageGalleryItem/ImageGalleryItem';
 import { Button } from './Button/Button';
 import { Loader } from './Loader/Loader';
+import { Modal } from './Modal/Modal';
 
 export class App extends Component {
   state = {
@@ -16,13 +17,15 @@ export class App extends Component {
     images: [],
     pageNumber: 1,
     isLoading: false,
+    modalImg: '',
+    idModalOpen: false,
   };
 
   handleFetchImg = async searchQuery => {
     this.setState({ isLoading: true, pageNumber: 1 });
 
     try {
-      const images = await fetchImg(searchQuery, this.state.pageNumber);
+      const images = await fetchImg(searchQuery, 1);
       this.setState({ images, searchQuery });
     } catch (err) {
       console.error(err);
@@ -33,7 +36,7 @@ export class App extends Component {
     }
   };
 
-  handlePag = async () => {
+  handleLoadMore = async () => {
     this.setState({ isLoading: true });
 
     try {
@@ -55,16 +58,35 @@ export class App extends Component {
     }
   };
 
+  handleModalOpen = evt => {
+    const modalImgId = evt.currentTarget.id;
+    const images = this.state.images;
+
+    const modalImg = images.find(image => image.id === Number(modalImgId));
+
+    this.setState({ isModalOpen: true, modalImg });
+  };
+
+  handleModalClose = evt => {
+    if (evt.target.tagName.toLowerCase() !== 'img') {
+      this.setState({ isModalOpen: false });
+    }
+    // this.setState({ isModalOpen: false });
+  };
+
   render() {
-    const { images, isLoading } = this.state;
+    const { images, isLoading, isModalOpen, modalImg } = this.state;
     return (
       <div className={clsx(css.App)}>
         <Searchbar onSubmit={this.handleFetchImg} />
+        {isModalOpen && (
+          <Modal modalImg={modalImg} onModalClick={this.handleModalClose} />
+        )}
         <ImageGallery>
-          <ImageGalleryItem images={images} />
+          <ImageGalleryItem images={images} onImgClick={this.handleModalOpen} />
         </ImageGallery>
         {isLoading && <Loader />}
-        {images.length > 0 && <Button onClick={this.handlePag} />}
+        {images.length > 0 && <Button onClick={this.handleLoadMore} />}
       </div>
     );
   }
