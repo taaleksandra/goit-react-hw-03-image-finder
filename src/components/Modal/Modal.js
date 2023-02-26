@@ -19,4 +19,5 @@ export class Modal extends Component {
 
 Modal.propTypes = {
   modalImg: PropTypes.object,
+  onModalClick: PropTypes.func,
 };

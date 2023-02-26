@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import clsx from 'clsx';
-import { PropTypes } from 'prop-types';
+import { func, PropTypes } from 'prop-types';
 
 import css from '../ImageGalleryItem/ImageGalleryItem.module.css';
 
@@ -28,4 +28,5 @@ export class ImageGalleryItem extends Component {
 
 ImageGalleryItem.propTypes = {
   images: PropTypes.array,
+  onImgClick: PropTypes.func,
 };

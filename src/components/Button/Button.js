@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import clsx from 'clsx';
+import { PropTypes } from 'prop-types';
 
 import css from '../Button/Button.module.css';
 
@@ -13,3 +14,7 @@ export class Button extends Component {
     );
   }
 }
+
+Button.propTypes = {
+  onClick: PropTypes.func,
+};

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import clsx from 'clsx';
+import { PropTypes } from 'prop-types';
 
 import css from '../Searchbar/Searchbar.module.css';
 
@@ -32,3 +33,7 @@ export class Searchbar extends Component {
     );
   }
 }
+
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func,
+};
