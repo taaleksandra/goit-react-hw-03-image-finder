@@ -1,4 +1,4 @@
-import React, { Children, Component } from 'react';
+import React, { Component } from 'react';
 import clsx from 'clsx';
 
 import css from '../ImageGallery/ImageGallery.module.css';

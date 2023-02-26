@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import clsx from 'clsx';
-import { func, PropTypes } from 'prop-types';
+import { PropTypes } from 'prop-types';
 
 import css from '../ImageGalleryItem/ImageGalleryItem.module.css';
 
